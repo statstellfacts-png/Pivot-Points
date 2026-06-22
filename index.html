@@ -20,7 +20,6 @@
   header h1{font-size:clamp(20px,4vw,26px);font-weight:700;}
   header h1 span{color:var(--accent);}
   .badge{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;background:var(--surface);border:1px solid var(--border-lit);color:var(--muted);letter-spacing:.08em;}
-
   .mkt-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.06em;font-family:'JetBrains Mono',monospace;}
   .mkt-open{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:var(--green);}
   .mkt-closed{background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.3);color:var(--red);}
@@ -39,177 +38,161 @@
   .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
   .card-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
 
-  /* Banner */
   .data-banner{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;margin-bottom:14px;}
-  .banner-live{background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);}
-  .banner-info{background:rgba(99,102,241,.07);border:1px solid rgba(99,102,241,.2);}
-  .banner-warn{background:rgba(234,179,8,.07);border:1px solid rgba(234,179,8,.2);}
-  .banner-error{background:rgba(244,63,94,.07);border:1px solid rgba(244,63,94,.2);}
+  .b-live{background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);}
+  .b-info{background:rgba(99,102,241,.07);border:1px solid rgba(99,102,241,.2);}
+  .b-warn{background:rgba(234,179,8,.07);border:1px solid rgba(234,179,8,.2);}
+  .b-err {background:rgba(244,63,94,.07); border:1px solid rgba(244,63,94,.2);}
   .bn-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
   .bn-body{flex:1;}
   .bn-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
-  .banner-live .bn-title{color:var(--green);}
-  .banner-info .bn-title{color:#818cf8;}
-  .banner-warn .bn-title{color:var(--yellow);}
-  .banner-error .bn-title{color:var(--red);}
+  .b-live .bn-title{color:var(--green);}
+  .b-info .bn-title{color:#818cf8;}
+  .b-warn .bn-title{color:var(--yellow);}
+  .b-err  .bn-title{color:var(--red);}
   .bn-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.55;}
 
-  /* Fields */
   .ohlc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   .field label{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
-  .field label .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle;}
   .dot-o{background:var(--muted);}.dot-h{background:var(--resist);}.dot-l{background:var(--support);}.dot-c{background:var(--accent);}
   .field input{width:100%;padding:9px 11px;background:var(--bg);border:1px solid var(--border-lit);border-radius:7px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500;transition:border-color .18s;outline:none;-moz-appearance:textfield;}
   .field input::-webkit-outer-spin-button,.field input::-webkit-inner-spin-button{-webkit-appearance:none;}
   .field input:focus{border-color:var(--accent);}
-  .field input.user-edit{border-color:var(--yellow);}
+  .field input.edited{border-color:var(--yellow);}
 
-  /* Skeleton */
   .sk{height:40px;border-radius:7px;background:linear-gradient(90deg,var(--border) 25%,var(--border-lit) 50%,var(--border) 75%);background-size:200% 100%;animation:shimmer 1.3s infinite;}
   @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-  /* Buttons */
-  .btn-row{display:flex;gap:8px;margin-top:12px;align-items:center;flex-wrap:wrap;}
+  .btn-row{display:flex;gap:8px;margin-top:12px;align-items:center;}
   .refresh-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:6px;border:1px solid var(--border-lit);background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;}
   .refresh-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent);}
   .refresh-btn:disabled{opacity:.4;cursor:not-allowed;}
-  .refresh-btn .ri{width:13px;height:13px;transition:transform .2s;}
+  .ri{width:13px;height:13px;}
   .refresh-btn.spin .ri{animation:spin .7s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg)}}
   .fetch-st{font-size:11px;color:var(--muted);}
-  .calc-btn{width:100%;margin-top:12px;padding:12px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:opacity .18s,transform .1s;}
-  .calc-btn:hover{opacity:.88;} .calc-btn:active{transform:scale(.98);}
+  .calc-btn{width:100%;margin-top:12px;padding:12px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .18s,transform .1s;}
+  .calc-btn:hover{opacity:.88;}.calc-btn:active{transform:scale(.98);}
 
-  /* Gap */
   .gap-row{margin-top:10px;display:none;}
   .gap-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:4px;font-family:'JetBrains Mono',monospace;}
   .gap-up{background:rgba(16,185,129,.15);color:var(--green);}
-  .gap-down{background:rgba(244,63,94,.15);color:var(--red);}
-  .gap-flat{background:rgba(100,116,139,.12);color:var(--muted);}
+  .gap-dn{background:rgba(244,63,94,.15);color:var(--red);}
+  .gap-fl{background:rgba(100,116,139,.12);color:var(--muted);}
 
-  /* Ladder */
   #ladder-wrap{position:relative;height:300px;background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
   #ladder-svg{width:100%;height:100%;}
-  .placeholder-msg{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;color:var(--muted);font-size:12px;letter-spacing:.05em;font-family:'JetBrains Mono',monospace;}
+  .ph-msg{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;color:var(--muted);font-size:12px;letter-spacing:.05em;font-family:'JetBrains Mono',monospace;}
 
-  /* Table */
   .results-wrap{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:13px;}
   th{text-align:left;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:0 10px 10px;font-weight:500;}
   td{padding:9px 10px;border-top:1px solid var(--border);}
-  .level-row:hover{background:rgba(255,255,255,.02);}
-  .level-tag{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:13px;}
-  .level-tag .pip{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+  .lvl-row:hover{background:rgba(255,255,255,.02);}
+  .lvl-tag{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:13px;}
+  .lvl-tag .pip{width:8px;height:8px;border-radius:50%;}
   .pip-r{background:var(--resist);}.pip-p{background:var(--pivot);}.pip-s{background:var(--support);}
-  .level-tag.r{color:var(--resist);}.level-tag.p{color:var(--pivot);}.level-tag.s{color:var(--support);}
+  .lvl-tag.r{color:var(--resist);}.lvl-tag.p{color:var(--pivot);}.lvl-tag.s{color:var(--support);}
   .val-cell{font-weight:500;color:var(--text);font-size:14px;}
-  .strength{font-size:10px;letter-spacing:.06em;padding:3px 8px;border-radius:20px;font-family:'Space Grotesk',sans-serif;font-weight:600;}
-  .str-high{background:rgba(34,211,238,.12);color:var(--resist);}
-  .str-med{background:rgba(99,102,241,.12);color:#a5b4fc;}
-  .str-low{background:rgba(100,116,139,.12);color:var(--muted);}
+  .str{font-size:10px;letter-spacing:.06em;padding:3px 8px;border-radius:20px;font-family:'Space Grotesk',sans-serif;font-weight:600;}
+  .sh{background:rgba(34,211,238,.12);color:var(--resist);}
+  .sm{background:rgba(99,102,241,.12);color:#a5b4fc;}
+  .sl{background:rgba(100,116,139,.12);color:var(--muted);}
 
-  /* Bias */
   .bias-bar{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:8px;border:1px solid var(--border-lit);background:var(--bg);margin-bottom:14px;}
-  .bias-indicator{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.08em;padding:4px 12px;border-radius:4px;}
-  .bias-bull{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3);}
-  .bias-bear{background:rgba(244,63,94,.15);color:var(--red);border:1px solid rgba(244,63,94,.3);}
-  .bias-neut{background:rgba(100,116,139,.12);color:var(--muted);border:1px solid var(--border);}
-  .bias-text{font-size:12px;color:var(--muted);flex:1;}
+  .bias-ind{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:4px 12px;border-radius:4px;}
+  .b-bull{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3);}
+  .b-bear{background:rgba(244,63,94,.15);color:var(--red);border:1px solid rgba(244,63,94,.3);}
+  .b-neut{background:rgba(100,116,139,.12);color:var(--muted);border:1px solid var(--border);}
+  .bias-txt{font-size:12px;color:var(--muted);flex:1;}
 
   .method-tabs{display:flex;gap:4px;padding:3px;background:var(--bg);border-radius:7px;border:1px solid var(--border);width:fit-content;}
   .method-btn{padding:5px 14px;border-radius:5px;border:none;background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
   .method-btn.active{background:var(--surface);color:var(--text);border:1px solid var(--border-lit);}
 
-  .insight-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  @media(max-width:680px){.insight-grid{grid-template-columns:1fr;}}
-  .insight-item{padding:12px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg);}
-  .insight-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
-  .insight-text{font-size:12px;color:var(--text);line-height:1.55;}
-  .insight-text strong{color:var(--accent);font-weight:600;}
+  .ig{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:680px){.ig{grid-template-columns:1fr;}}
+  .ii{padding:12px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg);}
+  .il{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .it{font-size:12px;color:var(--text);line-height:1.55;}
+  .it strong{color:var(--accent);font-weight:600;}
 
-  .footer-note{max-width:980px;margin:28px auto 0;font-size:11px;color:var(--muted);text-align:center;letter-spacing:.04em;line-height:1.7;border-top:1px solid var(--border);padding-top:18px;}
+  .footer-note{max-width:980px;margin:28px auto 0;font-size:11px;color:var(--muted);text-align:center;line-height:1.7;border-top:1px solid var(--border);padding-top:18px;}
 </style>
 </head>
 <body>
 
 <header>
   <div>
-    <div class="logo">Floor Trader Method · v4.1</div>
+    <div class="logo">Floor Trader Method · v5.0</div>
     <h1>Pivot <span>Calculator</span></h1>
   </div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-    <span id="mkt-status" class="mkt-pill mkt-closed"><span class="pulse"></span>—</span>
+    <span id="mkt-pill" class="mkt-pill mkt-closed"><span class="pulse"></span>—</span>
     <span class="badge" id="ist-clock">—</span>
     <span class="badge" id="date-badge">—</span>
   </div>
 </header>
 
 <div class="tabs">
-  <button class="tab-btn active" onclick="switchIndex(this,'Nifty 50')">Nifty 50</button>
-  <button class="tab-btn" onclick="switchIndex(this,'Bank Nifty')">Bank Nifty</button>
-  <button class="tab-btn" onclick="switchIndex(this,'Midcap Nifty')">Midcap Nifty</button>
-  <button class="tab-btn" onclick="switchIndex(this,'Fin Nifty')">Fin Nifty</button>
+  <button class="tab-btn active" onclick="switchIdx(this,'Nifty 50')">Nifty 50</button>
+  <button class="tab-btn" onclick="switchIdx(this,'Bank Nifty')">Bank Nifty</button>
+  <button class="tab-btn" onclick="switchIdx(this,'Midcap Nifty')">Midcap Nifty</button>
+  <button class="tab-btn" onclick="switchIdx(this,'Fin Nifty')">Fin Nifty</button>
 </div>
 
 <div class="main">
 
   <div class="card">
-    <div class="card-title" id="input-title">Previous Day OHLC — Nifty 50</div>
-
-    <div id="data-banner" class="data-banner banner-info">
+    <div class="card-title" id="input-title">Last Closed Session OHLC — Nifty 50</div>
+    <div id="banner" class="data-banner b-info">
       <span class="bn-icon" id="bn-icon">⏳</span>
       <div class="bn-body">
-        <div class="bn-title" id="bn-title">Fetching live data…</div>
-        <div class="bn-sub"  id="bn-sub">Searching for latest NSE closed session</div>
+        <div class="bn-title" id="bn-title">Detecting session…</div>
+        <div class="bn-sub"  id="bn-sub">Reading IST clock to find latest closed session</div>
       </div>
     </div>
 
-    <!-- OHLC fields — shown as skeleton while loading -->
     <div class="ohlc-grid">
       <div class="field"><label><span class="dot dot-o"></span>Open</label>
-        <div class="sk" id="sk-o"></div>
-        <input type="number" id="inp-o" style="display:none" step="0.05" oninput="onUserEdit(this)"></div>
+        <div class="sk" id="sk-o"></div><input type="number" id="inp-o" style="display:none" step="0.05" oninput="onEdit(this)"></div>
       <div class="field"><label><span class="dot dot-h"></span>High</label>
-        <div class="sk" id="sk-h"></div>
-        <input type="number" id="inp-h" style="display:none" step="0.05" oninput="onUserEdit(this)"></div>
+        <div class="sk" id="sk-h"></div><input type="number" id="inp-h" style="display:none" step="0.05" oninput="onEdit(this)"></div>
       <div class="field"><label><span class="dot dot-l"></span>Low</label>
-        <div class="sk" id="sk-l"></div>
-        <input type="number" id="inp-l" style="display:none" step="0.05" oninput="onUserEdit(this)"></div>
+        <div class="sk" id="sk-l"></div><input type="number" id="inp-l" style="display:none" step="0.05" oninput="onEdit(this)"></div>
       <div class="field"><label><span class="dot dot-c"></span>Close</label>
-        <div class="sk" id="sk-c"></div>
-        <input type="number" id="inp-c" style="display:none" step="0.05" oninput="onUserEdit(this)"></div>
+        <div class="sk" id="sk-c"></div><input type="number" id="inp-c" style="display:none" step="0.05" oninput="onEdit(this)"></div>
     </div>
 
     <div class="field" style="margin-top:10px;">
       <label><span class="dot" style="background:var(--green)"></span>Today's Open
         <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px;color:var(--muted)">(optional — gap detection)</span></label>
-      <input type="number" id="inp-to" placeholder="e.g. 23923.90" step="0.05">
+      <input type="number" id="inp-to" placeholder="e.g. 24044.50" step="0.05">
     </div>
 
     <div class="btn-row">
-      <button class="refresh-btn" id="refresh-btn" onclick="doFetch(true)">
+      <button class="refresh-btn" id="rbtn" onclick="load(true)">
         <svg class="ri" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
           <path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
-        </svg>
-        Refresh Data
+        </svg>Refresh Data
       </button>
-      <span class="fetch-st" id="fetch-st"></span>
+      <span class="fetch-st" id="fst"></span>
     </div>
-
     <button class="calc-btn" onclick="calculate()">⟶  Calculate Pivot Levels</button>
 
     <div class="gap-row" id="gap-row">
-      <span class="insight-label">Opening Gap</span><br>
+      <span class="il">Opening Gap</span><br>
       <span id="gap-tag" class="gap-tag" style="margin-top:5px;"></span>
-      <span id="gap-detail" style="font-size:12px;color:var(--muted);margin-left:8px;"></span>
+      <span id="gap-det" style="font-size:12px;color:var(--muted);margin-left:8px;"></span>
     </div>
   </div>
 
   <div class="card">
     <div class="card-title">Visual Price Ladder</div>
     <div id="ladder-wrap">
-      <div class="placeholder-msg" id="ladder-ph">
+      <div class="ph-msg" id="ladder-ph">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <rect x="3" y="3" width="18" height="18" rx="2"/>
           <line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/>
@@ -229,376 +212,401 @@
       </div>
     </div>
     <div class="bias-bar" id="bias-bar" style="display:none;">
-      <span class="bias-indicator" id="bias-tag">—</span>
-      <span class="bias-text" id="bias-desc">—</span>
+      <span class="bias-ind" id="bias-tag">—</span>
+      <span class="bias-txt" id="bias-desc">—</span>
     </div>
     <div class="results-wrap">
       <table><thead><tr>
         <th>Level</th><th>Value</th><th>Zone Type</th><th>Strength</th><th>Actionable Note</th>
       </tr></thead>
-      <tbody id="table-body">
-        <tr><td colspan="5" style="text-align:center;padding:28px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;">Loading OHLC… then press Calculate →</td></tr>
+      <tbody id="tbody">
+        <tr><td colspan="5" style="text-align:center;padding:28px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;">OHLC loading… then press Calculate →</td></tr>
       </tbody></table>
     </div>
   </div>
 
-  <div class="card full" id="insights-card" style="display:none;">
-    <div class="card-title">Intraday Insights — <span id="insights-lbl">Nifty 50</span></div>
-    <div class="insight-grid" id="insights-grid"></div>
+  <div class="card full" id="ins-card" style="display:none;">
+    <div class="card-title">Intraday Insights — <span id="ins-lbl">Nifty 50</span></div>
+    <div class="ig" id="ins-grid"></div>
   </div>
 
-  <div class="card full" id="confluence-card" style="display:none;">
+  <div class="card full" id="conf-card" style="display:none;">
     <div class="card-title">Cross-Method Comparison & Confluence</div>
     <div id="conf-inner"></div>
   </div>
-
 </div>
 
 <div class="footer-note">
-  OHLC auto-fetched from latest closed NSE session · Smart IST time-aware logic · Floor / Camarilla / Fibonacci · Values to 2 dp · Educational use — always use a stop-loss
+  OHLC auto-loaded from latest closed NSE session · IST time-aware · Floor / Camarilla / Fibonacci · Values to 2 dp · Educational use — always use a stop-loss
 </div>
 
 <script>
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // STATE
-// ══════════════════════════════════════════════
-let curIndex  = 'Nifty 50';
+// ═══════════════════════════════════════════════════════
+let curIdx    = 'Nifty 50';
 let curMethod = 'floor';
 let lastCalc  = null;
 let userEdited = false;
 
-// ══════════════════════════════════════════════
-// HARDCODED FALLBACK — keyed by YYYY-MM-DD (IST)
-// These are the CONFIRMED actual values for each date.
-// When live fetch fails, we find the most recent date
-// that matches the required session date.
-// ══════════════════════════════════════════════
-const KNOWN = {
+// ═══════════════════════════════════════════════════════
+// CONFIRMED OHLC CACHE — keyed by "YYYY-MM-DD"
+// Add a new entry here each evening after market close.
+// This is the fallback when the live API fetch fails.
+// ═══════════════════════════════════════════════════════
+const OHLC_CACHE = {
   'Nifty 50': {
+    '2026-06-18': { O:24044.50, H:24108.20, L:23969.70, C:24085.70 },
     '2026-06-16': { O:23923.90, H:24002.60, L:23888.20, C:23989.15 },
     '2026-06-15': { O:23412.55, H:23645.35, L:23313.90, C:23853.90 },
     '2026-06-13': { O:23104.40, H:23327.45, L:23072.05, C:23161.60 },
   }
 };
 
-// ══════════════════════════════════════════════
-// IST UTILITIES
-// ══════════════════════════════════════════════
-function nowIST() {
-  return new Date(new Date().toLocaleString('en-US', { timeZone:'Asia/Kolkata' }));
-}
-function toISTDateStr(d) {
-  // Returns YYYY-MM-DD for given Date (already in IST)
-  const y = d.getFullYear();
-  const m = String(d.getMonth()+1).padStart(2,'0');
-  const dy = String(d.getDate()).padStart(2,'0');
-  return `${y}-${m}-${dy}`;
-}
-function fmtDisplay(dateStr) {
-  // YYYY-MM-DD → "16 Jun 2026"
-  const [y,m,d] = dateStr.split('-');
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
-}
-function isWeekday(ist) { const d=ist.getDay(); return d>=1&&d<=5; }
-function isAfterClose(ist) {
-  if (!isWeekday(ist)) return true;
-  return ist.getHours()*60+ist.getMinutes() >= 15*60+30;
-}
-function isPreOpen(ist) {
-  if (!isWeekday(ist)) return false;
-  const t=ist.getHours()*60+ist.getMinutes();
-  return t>=9*60 && t<9*60+15;
-}
-function isOpen(ist) {
-  if (!isWeekday(ist)) return false;
-  const t=ist.getHours()*60+ist.getMinutes();
-  return t>=9*60+15 && t<15*60+30;
+// ═══════════════════════════════════════════════════════
+// IST CLOCK UTILITIES
+// ═══════════════════════════════════════════════════════
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function istNow() {
+  // Returns a plain object with IST date/time components
+  const d = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Kolkata'}));
+  return {
+    year:  d.getFullYear(),
+    month: d.getMonth(),      // 0-based
+    date:  d.getDate(),
+    day:   d.getDay(),        // 0=Sun
+    hours: d.getHours(),
+    mins:  d.getMinutes(),
+    secs:  d.getSeconds(),
+    totalMins: d.getHours()*60 + d.getMinutes()
+  };
 }
 
-// ══════════════════════════════════════════════
-// DECIDE WHICH DATE'S OHLC TO LOAD
-// After 15:30 IST → today's data (session complete)
-// Before 15:30 IST → previous trading day's data
-// ══════════════════════════════════════════════
-function targetDate() {
-  const ist = nowIST();
-  if (isAfterClose(ist)) {
-    // Use today if it's a weekday, else walk back
-    if (isWeekday(ist)) return { dateStr: toISTDateStr(ist), reason: 'after-close' };
+function toDateStr(year, month, date) {
+  return `${year}-${String(month+1).padStart(2,'0')}-${String(date).padStart(2,'0')}`;
+}
+
+function isWeekday(dayOfWeek) { return dayOfWeek >= 1 && dayOfWeek <= 5; }
+
+// ═══════════════════════════════════════════════════════
+// CORE LOGIC: "What is the last closed session date?"
+//
+// Rules (all times IST):
+//   • After 15:30 on a weekday  → TODAY is the last closed session
+//   • Before 15:30 on a weekday → walk back to previous weekday
+//   • On a weekend              → walk back to Friday (or Thursday if Friday is holiday)
+//
+// We do NOT hard-code specific holidays here; the live API
+// fetch handles those. The cache fallback walks back up to
+// 7 days to find the nearest known entry.
+// ═══════════════════════════════════════════════════════
+function lastClosedDate() {
+  const t = istNow();
+  const NSE_CLOSE = 15*60 + 30; // 15:30 in minutes
+
+  // If it's after 15:30 on a weekday → today's session is complete
+  if (isWeekday(t.day) && t.totalMins >= NSE_CLOSE) {
+    return toDateStr(t.year, t.month, t.date);
   }
-  // Walk back to find last completed trading day
-  const d = new Date(ist);
-  d.setDate(d.getDate()-1);
-  while (!isWeekday(d)) d.setDate(d.getDate()-1);
-  return { dateStr: toISTDateStr(d), reason: 'pre-close' };
+
+  // Otherwise walk back day by day until we hit a weekday
+  const d = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Kolkata'}));
+  d.setDate(d.getDate() - 1);
+  for (let i = 0; i < 10; i++) {
+    if (isWeekday(d.getDay())) {
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+    d.setDate(d.getDate() - 1);
+  }
+  return null;
 }
 
-// ══════════════════════════════════════════════
-// CLOCK & MARKET STATUS
-// ══════════════════════════════════════════════
-function updateClock() {
-  const ist = nowIST();
-  const hh=String(ist.getHours()).padStart(2,'0'), mm=String(ist.getMinutes()).padStart(2,'0'), ss=String(ist.getSeconds()).padStart(2,'0');
-  document.getElementById('ist-clock').textContent = `${hh}:${mm}:${ss} IST`;
-  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  document.getElementById('date-badge').textContent = `${ist.getDate()} ${months[ist.getMonth()]} ${ist.getFullYear()}`;
-  const pill=document.getElementById('mkt-status');
-  if (isOpen(ist)) { pill.className='mkt-pill mkt-open'; pill.innerHTML='<span class="pulse"></span>Market Open'; }
-  else if (isPreOpen(ist)) { pill.className='mkt-pill mkt-pre'; pill.innerHTML='<span class="pulse"></span>Pre-Market'; }
-  else { pill.className='mkt-pill mkt-closed'; pill.innerHTML='<span class="pulse"></span>Market Closed'; }
+function fmtDisplay(dateStr) {
+  // "2026-06-18" → "18 Jun 2026"
+  const [y,m,d] = dateStr.split('-');
+  return `${parseInt(d)} ${MONTHS[parseInt(m)-1]} ${y}`;
 }
-setInterval(updateClock,1000);
-updateClock();
 
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// CLOCK & MARKET STATUS (updates every second)
+// ═══════════════════════════════════════════════════════
+function tick() {
+  const t = istNow();
+  const hh = String(t.hours).padStart(2,'0');
+  const mm = String(t.mins).padStart(2,'0');
+  const ss = String(t.secs).padStart(2,'0');
+  document.getElementById('ist-clock').textContent  = `${hh}:${mm}:${ss} IST`;
+  document.getElementById('date-badge').textContent = `${t.date} ${MONTHS[t.month]} ${t.year}`;
+
+  const pill = document.getElementById('mkt-pill');
+  const NSE_OPEN = 9*60+15, NSE_CLOSE = 15*60+30;
+  if (isWeekday(t.day) && t.totalMins >= NSE_OPEN && t.totalMins < NSE_CLOSE) {
+    pill.className='mkt-pill mkt-open';   pill.innerHTML='<span class="pulse"></span>Market Open';
+  } else if (isWeekday(t.day) && t.totalMins >= 9*60 && t.totalMins < NSE_OPEN) {
+    pill.className='mkt-pill mkt-pre';    pill.innerHTML='<span class="pulse"></span>Pre-Market';
+  } else {
+    pill.className='mkt-pill mkt-closed'; pill.innerHTML='<span class="pulse"></span>Market Closed';
+  }
+}
+setInterval(tick, 1000);
+tick();
+
+// ═══════════════════════════════════════════════════════
 // UI HELPERS
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+function setBanner(type, icon, title, sub) {
+  const cls = {live:'b-live',info:'b-info',warn:'b-warn',err:'b-err'}[type]||'b-info';
+  document.getElementById('banner').className = `data-banner ${cls}`;
+  document.getElementById('bn-icon').textContent  = icon;
+  document.getElementById('bn-title').textContent = title;
+  document.getElementById('bn-sub').textContent   = sub;
+}
+function setSpin(on) {
+  const btn = document.getElementById('rbtn');
+  btn.disabled = on;
+  on ? btn.classList.add('spin') : btn.classList.remove('spin');
+}
+function setStatus(msg, clearMs=0) {
+  document.getElementById('fst').textContent = msg;
+  if (clearMs) setTimeout(()=>document.getElementById('fst').textContent='', clearMs);
+}
 function showSkeleton() {
-  ['o','h','l','c'].forEach(f=>{
-    document.getElementById('sk-'+f).style.display='block';
-    document.getElementById('inp-'+f).style.display='none';
+  ['o','h','l','c'].forEach(f => {
+    document.getElementById('sk-'+f).style.display  = 'block';
+    document.getElementById('inp-'+f).style.display = 'none';
   });
 }
-function showFields(data) {
-  ['o','h','l','c'].forEach(f=>{
-    document.getElementById('sk-'+f).style.display='none';
-    const inp=document.getElementById('inp-'+f);
-    inp.style.display='block';
-    if (data && data[f.toUpperCase()]!=null) {
-      inp.value=data[f.toUpperCase()];
-      inp.classList.remove('user-edit');
+function fillFields(data, clearEdit=true) {
+  ['o','h','l','c'].forEach(f => {
+    document.getElementById('sk-'+f).style.display  = 'none';
+    const inp = document.getElementById('inp-'+f);
+    inp.style.display = 'block';
+    if (data && data[f.toUpperCase()] != null) {
+      inp.value = data[f.toUpperCase()];
+      if (clearEdit) inp.classList.remove('edited');
     }
   });
 }
-function showFieldsEmpty() {
-  ['o','h','l','c'].forEach(f=>{
-    document.getElementById('sk-'+f).style.display='none';
-    const inp=document.getElementById('inp-'+f);
-    inp.style.display='block';
-    inp.value='';
-    inp.placeholder='Enter manually';
+function emptyFields() {
+  ['o','h','l','c'].forEach(f => {
+    document.getElementById('sk-'+f).style.display  = 'none';
+    const inp = document.getElementById('inp-'+f);
+    inp.style.display = 'block';
+    inp.value = '';
+    inp.placeholder = 'Enter manually';
   });
 }
-function setBanner(type, icon, title, sub) {
-  const el=document.getElementById('data-banner');
-  el.className='data-banner '+(type==='live'?'banner-live':type==='warn'?'banner-warn':type==='error'?'banner-error':'banner-info');
-  document.getElementById('bn-icon').textContent=icon;
-  document.getElementById('bn-title').textContent=title;
-  document.getElementById('bn-sub').textContent=sub;
-}
-function setStatus(msg) { document.getElementById('fetch-st').textContent=msg; }
-function setRefreshSpinning(on) {
-  const btn=document.getElementById('refresh-btn');
-  btn.disabled=on;
-  on ? btn.classList.add('spin') : btn.classList.remove('spin');
-}
-function onUserEdit(inp) {
-  inp.classList.add('user-edit');
-  userEdited=true;
+function onEdit(inp) {
+  inp.classList.add('edited');
+  userEdited = true;
   setBanner('warn','✏️','Manually Edited','Click Refresh Data to restore auto-loaded values.');
 }
 
-// ══════════════════════════════════════════════
-// LIVE FETCH via Anthropic API
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// LIVE FETCH via Anthropic API (web search)
+// ═══════════════════════════════════════════════════════
 async function fetchLive(index, dateStr) {
-  const displayDate = fmtDisplay(dateStr);
-  const prompt = `Search the web and return ONLY a raw JSON object — no markdown, no explanation, no backticks.
-
-Find the NSE ${index} spot index OHLC data for ${displayDate}.
-
-Return exactly this format:
-{"O":0.00,"H":0.00,"L":0.00,"C":0.00,"date":"${displayDate}","source":"source name"}
-
-Rules:
-- Spot index values only (not futures)
-- Numbers only, no commas
-- If not found for that exact date, return {"error":"not found for ${displayDate}"}
-- Return ONLY the JSON object, absolutely nothing else`;
+  const disp = fmtDisplay(dateStr);
+  const prompt =
+`Search the web for NSE ${index} spot index OHLC data for ${disp}.
+Return ONLY a raw JSON object — no markdown, no explanation, no backticks.
+Format: {"O":0.00,"H":0.00,"L":0.00,"C":0.00,"date":"${disp}","source":"source name"}
+Rules: spot index only (not futures), numbers without commas.
+If not found return: {"error":"not found"}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      model:'claude-sonnet-4-6',
-      max_tokens:400,
-      tools:[{ type:'web_search_20250305', name:'web_search' }],
-      messages:[{ role:'user', content:prompt }]
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 300,
+      tools: [{ type:'web_search_20250305', name:'web_search' }],
+      messages: [{ role:'user', content: prompt }]
     })
   });
   if (!res.ok) throw new Error('HTTP '+res.status);
   const data = await res.json();
   const txt = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('');
-  const clean = txt.replace(/```json|```/g,'').trim();
-  // Extract first { ... } block
-  const match = clean.match(/\{[\s\S]*\}/);
-  if (!match) throw new Error('No JSON in response');
-  const parsed = JSON.parse(match[0]);
-  if (parsed.error) throw new Error(parsed.error);
-  if (!parsed.O||!parsed.H||!parsed.L||!parsed.C) throw new Error('Incomplete OHLC');
-  return parsed;
+  const match = txt.replace(/```json|```/g,'').match(/\{[\s\S]*?\}/);
+  if (!match) throw new Error('No JSON');
+  const p = JSON.parse(match[0]);
+  if (p.error) throw new Error(p.error);
+  if (!p.O||!p.H||!p.L||!p.C) throw new Error('Incomplete');
+  return p;
 }
 
-// ══════════════════════════════════════════════
-// FALLBACK — find best known data for target date
-// ══════════════════════════════════════════════
-function getFallback(index, targetDateStr) {
-  const known = KNOWN[index];
-  if (!known) return null;
-  // Try exact date first
-  if (known[targetDateStr]) return { data:known[targetDateStr], dateStr:targetDateStr };
-  // Walk back up to 7 days to find nearest prior session
-  const d = new Date(targetDateStr+'T00:00:00');
-  for (let i=1; i<=7; i++) {
+// ═══════════════════════════════════════════════════════
+// CACHE LOOKUP — find best entry for target date
+// Walks backward up to 7 days if exact date not cached.
+// ═══════════════════════════════════════════════════════
+function fromCache(index, dateStr) {
+  const cache = OHLC_CACHE[index];
+  if (!cache) return null;
+  // Exact match
+  if (cache[dateStr]) return { data: cache[dateStr], dateStr };
+  // Walk back
+  const d = new Date(dateStr+'T12:00:00');
+  for (let i = 1; i <= 7; i++) {
     d.setDate(d.getDate()-1);
-    const ds = toISTDateStr(d);
-    if (known[ds]) return { data:known[ds], dateStr:ds };
+    const k = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    if (cache[k]) return { data: cache[k], dateStr: k };
   }
   return null;
 }
 
-// ══════════════════════════════════════════════
-// MAIN FETCH + LOAD
-// ══════════════════════════════════════════════
-async function doFetch(manual=false) {
-  if (manual) userEdited=false;
-  setRefreshSpinning(true);
+// ═══════════════════════════════════════════════════════
+// MAIN LOAD FUNCTION
+// ═══════════════════════════════════════════════════════
+async function load(manual=false) {
+  if (manual) userEdited = false;
+
+  // Step 1: determine the target date
+  const targetDateStr = lastClosedDate();
+  if (!targetDateStr) {
+    emptyFields();
+    setBanner('err','⚠️','Date Error','Could not determine session date. Enter OHLC manually.');
+    return;
+  }
+  const dispDate = fmtDisplay(targetDateStr);
+
+  // Step 2: build context label
+  const t = istNow();
+  const isToday = targetDateStr === toDateStr(t.year, t.month, t.date);
+  const ctxNote = isToday
+    ? `Market closed for today (${dispDate}) — loading today's completed session`
+    : `Pre-market / market hours — loading last closed session (${dispDate})`;
+
+  setSpin(true);
   setStatus('Fetching…');
   showSkeleton();
-  setBanner('info','⏳','Fetching live data…','Searching NSE for latest closed session');
-
-  const { dateStr, reason } = targetDate();
-  const displayDate = fmtDisplay(dateStr);
-  const sessionNote = reason==='after-close'
-    ? `Market closed — loading today's completed session (${displayDate})`
-    : `Market open/pre-open — loading previous session (${displayDate}) for today's pivots`;
+  setBanner('info','🔍','Searching live data…', ctxNote);
 
   try {
-    if (curIndex === 'Nifty 50') {
-      // Attempt live API fetch
-      setBanner('info','🔍','Searching…', sessionNote);
-      const live = await fetchLive(curIndex, dateStr);
-      showFields({ O:live.O, H:live.H, L:live.L, C:live.C });
+    // ── Try live API fetch first ──
+    if (curIdx === 'Nifty 50') {
+      const live = await fetchLive(curIdx, targetDateStr);
+      fillFields({ O:live.O, H:live.H, L:live.L, C:live.C });
       setBanner('live','✅',
-        `Live — ${live.date} · Source: ${live.source}`,
-        `${sessionNote} · Edit any field to override.`
+        `Live — ${live.date}  ·  Source: ${live.source||'web search'}`,
+        `${ctxNote} · Edit any field to override.`
       );
-      setStatus('Live data loaded ✓');
-      if (!userEdited) setTimeout(calculate, 300);
+      setStatus('Live data loaded ✓', 4000);
     } else {
-      throw new Error('non-nifty');
+      throw new Error('non-nifty-live');
     }
-  } catch(liveErr) {
-    // Try hardcoded fallback
-    const fb = getFallback(curIndex, dateStr);
-    if (fb) {
-      showFields(fb.data);
-      const isCurrent = fb.dateStr === dateStr;
-      setBanner(isCurrent ? 'live' : 'warn',
-        isCurrent ? '📅' : '⚠️',
-        isCurrent
-          ? `Offline Data — ${fmtDisplay(fb.dateStr)}`
-          : `Fallback — ${fmtDisplay(fb.dateStr)} (nearest available)`,
-        `${sessionNote} · ${isCurrent ? 'Hardcoded confirmed data.' : 'Exact date not in offline cache — showing nearest prior session.'} Edit fields if needed.`
+  } catch {
+    // ── Fallback to cache ──
+    const hit = fromCache(curIdx, targetDateStr);
+    if (hit) {
+      fillFields(hit.data);
+      const exact   = hit.dateStr === targetDateStr;
+      const hitDisp = fmtDisplay(hit.dateStr);
+      setBanner(
+        exact ? 'live' : 'warn',
+        exact ? '📅' : '⚠️',
+        exact
+          ? `Offline Cache — ${hitDisp}`
+          : `Nearest Cache — ${hitDisp} (${dispDate} not yet in cache)`,
+        `${ctxNote}${exact ? '' : ' · Exact date not cached — showing nearest prior session'}. Edit fields if values differ.`
       );
-      setStatus('Loaded from cache');
-      if (!userEdited) setTimeout(calculate, 300);
+      setStatus('Loaded from cache', 4000);
     } else {
-      // Nothing — show empty editable fields
-      showFieldsEmpty();
-      setBanner('error','⚠️','Manual Entry Required',
-        `No data available for ${curIndex} on ${displayDate}. Enter previous session OHLC manually.`
+      emptyFields();
+      setBanner('err','⚠️','Manual Entry Required',
+        `No data for ${curIdx} on ${dispDate}. Enter previous session OHLC manually.`
       );
-      setStatus('Enter manually');
+      setStatus('Enter manually', 4000);
     }
-  } finally {
-    setRefreshSpinning(false);
-    setTimeout(()=>setStatus(''), 4000);
   }
+
+  setSpin(false);
+  if (!userEdited) setTimeout(calculate, 350);
 }
 
-// ══════════════════════════════════════════════
-// INDEX / METHOD TABS
-// ══════════════════════════════════════════════
-function switchIndex(el, name) {
+// ═══════════════════════════════════════════════════════
+// INDEX / METHOD SWITCHES
+// ═══════════════════════════════════════════════════════
+function switchIdx(el, name) {
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
-  curIndex=name;
-  document.getElementById('input-title').textContent='Previous Day OHLC — '+name;
-  document.getElementById('insights-lbl').textContent=name;
-  userEdited=false;
-  doFetch(false);
+  curIdx = name;
+  document.getElementById('input-title').textContent = `Last Closed Session OHLC — ${name}`;
+  document.getElementById('ins-lbl').textContent = name;
+  userEdited = false;
+  load(false);
 }
-function switchMethod(el, method) {
+function switchMethod(el, m) {
   document.querySelectorAll('.method-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
-  curMethod=method;
+  curMethod = m;
   if (lastCalc) renderAll(lastCalc);
 }
 
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // PIVOT MATH
-// ══════════════════════════════════════════════
-const r=v=>Math.round(v*100)/100;
-function calcFloor(O,H,L,C){const P=(H+L+C)/3;return{P,R1:2*P-L,R2:P+(H-L),R3:H+2*(P-L),S1:2*P-H,S2:P-(H-L),S3:L-2*(H-P)};}
-function calcCam(O,H,L,C){const rng=H-L;return{P:(H+L+C)/3,R1:C+rng*1.1/12,R2:C+rng*1.1/6,R3:C+rng*1.1/4,S1:C-rng*1.1/12,S2:C-rng*1.1/6,S3:C-rng*1.1/4};}
-function calcFib(O,H,L,C){const P=(H+L+C)/3,rng=H-L;return{P,R1:P+.382*rng,R2:P+.618*rng,R3:P+rng,S1:P-.382*rng,S2:P-.618*rng,S3:P-rng};}
+// ═══════════════════════════════════════════════════════
+const R = v => Math.round(v*100)/100;
+function floor(O,H,L,C){const P=(H+L+C)/3;return{P,R1:2*P-L,R2:P+(H-L),R3:H+2*(P-L),S1:2*P-H,S2:P-(H-L),S3:L-2*(H-P)};}
+function cam(O,H,L,C){const rng=H-L;return{P:(H+L+C)/3,R1:C+rng*1.1/12,R2:C+rng*1.1/6,R3:C+rng*1.1/4,S1:C-rng*1.1/12,S2:C-rng*1.1/6,S3:C-rng*1.1/4};}
+function fib(O,H,L,C){const P=(H+L+C)/3,rng=H-L;return{P,R1:P+.382*rng,R2:P+.618*rng,R3:P+rng,S1:P-.382*rng,S2:P-.618*rng,S3:P-rng};}
 
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // CALCULATE
-// ══════════════════════════════════════════════
-function calculate(){
-  const O=parseFloat(document.getElementById('inp-o').value);
-  const H=parseFloat(document.getElementById('inp-h').value);
-  const L=parseFloat(document.getElementById('inp-l').value);
-  const C=parseFloat(document.getElementById('inp-c').value);
-  const TO=parseFloat(document.getElementById('inp-to').value);
-  if([O,H,L,C].some(isNaN)){alert('Please enter all OHLC values.');return;}
+// ═══════════════════════════════════════════════════════
+function calculate() {
+  const O=+document.getElementById('inp-o').value;
+  const H=+document.getElementById('inp-h').value;
+  const L=+document.getElementById('inp-l').value;
+  const C=+document.getElementById('inp-c').value;
+  const TO=+document.getElementById('inp-to').value;
+  if([O,H,L,C].some(isNaN)||[O,H,L,C].some(v=>v===0)){alert('Please enter all OHLC values.');return;}
   if(H<L){alert('High must be ≥ Low.');return;}
-  lastCalc={O,H,L,C,TO,floor:calcFloor(O,H,L,C),cam:calcCam(O,H,L,C),fib:calcFib(O,H,L,C)};
+  lastCalc={O,H,L,C,TO,floor:floor(O,H,L,C),cam:cam(O,H,L,C),fib:fib(O,H,L,C)};
   renderAll(lastCalc);
 }
 
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // RENDER
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 function renderAll(d){renderBias(d);renderTable(d);renderLadder(d);renderInsights(d);renderConfluence(d);renderGap(d);}
 
 function renderBias(d){
   const bar=document.getElementById('bias-bar'); bar.style.display='flex';
   const P=(d[curMethod]||d.floor).P;
   const tag=document.getElementById('bias-tag'),desc=document.getElementById('bias-desc');
-  if(!isNaN(d.TO)){
-    if(d.TO>P){tag.className='bias-indicator bias-bull';tag.textContent='▲  BULLISH BIAS';desc.textContent=`Open (${r(d.TO)}) above Pivot (${r(P)}). Favour longs at S1. Targets: R1 → R2.`;}
-    else if(d.TO<P){tag.className='bias-indicator bias-bear';tag.textContent='▼  BEARISH BIAS';desc.textContent=`Open (${r(d.TO)}) below Pivot (${r(P)}). Favour shorts at R1. Targets: S1 → S2.`;}
-    else{tag.className='bias-indicator bias-neut';tag.textContent='◆  NEUTRAL';desc.textContent=`Open at Pivot (${r(P)}). Watch 15-min candle for directional confirmation.`;}
+  if(!isNaN(d.TO)&&d.TO!==0){
+    if(d.TO>P){tag.className='bias-ind b-bull';tag.textContent='▲  BULLISH BIAS';
+      desc.textContent=`Open (${R(d.TO)}) above Pivot (${R(P)}). Favour longs at S1. Targets: R1 → R2.`;}
+    else if(d.TO<P){tag.className='bias-ind b-bear';tag.textContent='▼  BEARISH BIAS';
+      desc.textContent=`Open (${R(d.TO)}) below Pivot (${R(P)}). Favour shorts at R1. Targets: S1 → S2.`;}
+    else{tag.className='bias-ind b-neut';tag.textContent='◆  NEUTRAL';
+      desc.textContent=`Open at Pivot (${R(P)}). Watch 15-min candle for confirmation.`;}
   } else {
-    tag.className='bias-indicator bias-neut';tag.textContent='◆  AWAITING OPEN';
-    desc.textContent=`Pivot at ${r(P)}. Above = bullish; below = bearish. Add Today's Open for live bias.`;
+    tag.className='bias-ind b-neut';tag.textContent='◆  AWAITING OPEN';
+    desc.textContent=`Pivot at ${R(P)}. Above = bullish; below = bearish. Add Today's Open for live signal.`;
   }
 }
 
 function renderTable(d){
-  const tbody=document.getElementById('table-body'); tbody.innerHTML='';
+  const tbody=document.getElementById('tbody'); tbody.innerHTML='';
   const lvl=d[curMethod]||d.floor;
-  const rows=[
-    {key:'R3',val:lvl.R3,type:'Extreme Resistance',str:'str-high',note:'Momentum/news target only. Rarely hit on normal sessions.'},
-    {key:'R2',val:lvl.R2,type:'Strong Resistance',str:'str-high',note:'High-probability reversal. Trail SL here if long. Watch for rejection candle.'},
-    {key:'R1',val:lvl.R1,type:'First Resistance',str:'str-med',note:'First hurdle for bulls. Partial profit-taking zone.'},
-    {key:'P', val:lvl.P, type:'Pivot (Anchor)',str:'str-med',note:'Directional anchor. Sustain above = bullish; below = bearish.'},
-    {key:'S1',val:lvl.S1,type:'First Support',str:'str-med',note:'First demand zone. Bounce expected; if broken, S2 next.'},
-    {key:'S2',val:lvl.S2,type:'Strong Support',str:'str-high',note:'High-probability reversal. Partial cover for shorts here.'},
-    {key:'S3',val:lvl.S3,type:'Extreme Support',str:'str-high',note:'Panic/capitulation zone. Reversal only with confirmation candle.'},
-  ];
-  rows.forEach(row=>{
-    const isR=row.key.startsWith('R'),isP=row.key==='P';
-    const cls=isR?'r':isP?'p':'s',pip=isR?'pip-r':isP?'pip-p':'pip-s';
-    const tr=document.createElement('tr');tr.className='level-row';
-    tr.innerHTML=`<td><span class="level-tag ${cls}"><span class="pip ${pip}"></span>${row.key}</span></td>
-      <td class="val-cell">${r(row.val).toFixed(2)}</td>
+  [
+    {key:'R3',val:lvl.R3,type:'Extreme Resistance',str:'sh',note:'Momentum/news target only. Rarely reached on normal sessions.'},
+    {key:'R2',val:lvl.R2,type:'Strong Resistance', str:'sh',note:'High-probability reversal. Trail SL here if long. Watch rejection candle.'},
+    {key:'R1',val:lvl.R1,type:'First Resistance',  str:'sm',note:'First hurdle for bulls. Partial profit-taking zone.'},
+    {key:'P', val:lvl.P, type:'Pivot (Anchor)',     str:'sm',note:'Directional anchor. Sustain above = bullish; below = bearish.'},
+    {key:'S1',val:lvl.S1,type:'First Support',      str:'sm',note:'First demand zone. Bounce expected; if broken, S2 is next.'},
+    {key:'S2',val:lvl.S2,type:'Strong Support',     str:'sh',note:'High-probability reversal. Partial cover for shorts here.'},
+    {key:'S3',val:lvl.S3,type:'Extreme Support',    str:'sh',note:'Capitulation zone. Reversal only with strong confirmation.'},
+  ].forEach(row=>{
+    const isR=row.key[0]==='R',isP=row.key==='P';
+    const cls=isR?'r':isP?'p':'s', pip=isR?'pip-r':isP?'pip-p':'pip-s';
+    const tr=document.createElement('tr'); tr.className='lvl-row';
+    tr.innerHTML=`<td><span class="lvl-tag ${cls}"><span class="pip ${pip}"></span>${row.key}</span></td>
+      <td class="val-cell">${R(row.val).toFixed(2)}</td>
       <td style="color:var(--muted);font-size:12px;">${row.type}</td>
-      <td><span class="strength ${row.str}">${row.str==='str-high'?'HIGH':row.str==='str-med'?'MED':'LOW'}</span></td>
+      <td><span class="str ${row.str}">${row.str==='sh'?'HIGH':'MED'}</span></td>
       <td style="color:var(--muted);font-size:12px;line-height:1.45;">${row.note}</td>`;
     tbody.appendChild(tr);
   });
@@ -609,30 +617,32 @@ function renderLadder(d){
   const svg=document.getElementById('ladder-svg'); svg.style.display='block';
   const fl=d.floor;
   const levels=[
-    {key:'R3',val:fl.R3,col:'var(--resist)',w:2},{key:'R2',val:fl.R2,col:'var(--resist)',w:1.5},
-    {key:'R1',val:fl.R1,col:'var(--resist)',w:1},{key:'P',val:fl.P,col:'var(--pivot)',w:2.5},
-    {key:'S1',val:fl.S1,col:'var(--support)',w:1},{key:'S2',val:fl.S2,col:'var(--support)',w:1.5},
-    {key:'S3',val:fl.S3,col:'var(--support)',w:2},
+    {k:'R3',v:fl.R3,c:'var(--resist)',w:2},{k:'R2',v:fl.R2,c:'var(--resist)',w:1.5},
+    {k:'R1',v:fl.R1,c:'var(--resist)',w:1},{k:'P',v:fl.P,c:'var(--pivot)',w:2.5},
+    {k:'S1',v:fl.S1,c:'var(--support)',w:1},{k:'S2',v:fl.S2,c:'var(--support)',w:1.5},
+    {k:'S3',v:fl.S3,c:'var(--support)',w:2},
   ];
-  const vals=levels.map(l=>l.val);
-  const minV=Math.min(...vals)*.9995,maxV=Math.max(...vals)*1.0005,range=maxV-minV;
-  const W=400,H=300,pL=70,pR=105,pT=18,pB=18,cH=H-pT-pB,cW=W-pL-pR;
-  const toY=v=>pT+cH-((v-minV)/range*cH);
+  const vals=levels.map(l=>l.v);
+  const minV=Math.min(...vals)*.9994,maxV=Math.max(...vals)*1.0006,rng=maxV-minV;
+  const W=400,H=300,pL=70,pR=110,pT=18,pB=18,cH=H-pT-pB,cW=W-pL-pR;
+  const toY=v=>pT+cH-((v-minV)/rng*cH);
   let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">`;
   for(let i=0;i<=4;i++){const y=pT+(cH/4)*i;s+=`<line x1="${pL}" y1="${y}" x2="${W-pR}" y2="${y}" stroke="#1e2330" stroke-width="1"/>`;}
-  const cX=pL+cW*.5,oY=toY(d.O),cY=toY(d.C),hY=toY(d.H),lY=toY(d.L);
-  const bull=d.C>=d.O,cc=bull?'#10b981':'#f43f5e';
+  const cX=pL+cW*.5;
+  const oY=toY(d.O),cY=toY(d.C),hY=toY(d.H),lY=toY(d.L);
+  const bull=d.C>=d.O, cc=bull?'#10b981':'#f43f5e';
   s+=`<line x1="${cX}" y1="${hY}" x2="${cX}" y2="${lY}" stroke="${cc}" stroke-width="1.5" opacity=".4"/>`;
   const bT=Math.min(oY,cY),bH2=Math.max(Math.abs(oY-cY),2);
   s+=`<rect x="${cX-10}" y="${bT}" width="20" height="${bH2}" fill="${cc}" opacity=".18" rx="1"/>`;
   s+=`<rect x="${cX-10}" y="${bT}" width="20" height="${bH2}" fill="none" stroke="${cc}" stroke-width="1" rx="1" opacity=".4"/>`;
   levels.forEach(lv=>{
-    const y=toY(lv.val),dash=lv.key==='P'?'':'stroke-dasharray="4 3"';
-    s+=`<line x1="${pL}" y1="${y}" x2="${W-pR}" y2="${y}" stroke="${lv.col}" stroke-width="${lv.w}" ${dash} opacity="${lv.key==='P'?1:.85}"/>`;
-    s+=`<text x="${pL-6}" y="${y+4}" text-anchor="end" font-size="11" fill="${lv.col}" font-weight="700">${lv.key}</text>`;
-    s+=`<text x="${W-pR+6}" y="${y+4}" text-anchor="start" font-size="10" fill="${lv.col}" opacity=".85">${r(lv.val).toFixed(1)}</text>`;
+    const y=toY(lv.v),dash=lv.k==='P'?'':'stroke-dasharray="4 3"';
+    s+=`<line x1="${pL}" y1="${y}" x2="${W-pR}" y2="${y}" stroke="${lv.c}" stroke-width="${lv.w}" ${dash} opacity="${lv.k==='P'?1:.85}"/>`;
+    s+=`<text x="${pL-6}" y="${y+4}" text-anchor="end" font-size="11" fill="${lv.c}" font-weight="700">${lv.k}</text>`;
+    s+=`<text x="${W-pR+6}" y="${y+4}" text-anchor="start" font-size="10" fill="${lv.c}" opacity=".85">${R(lv.v).toFixed(1)}</text>`;
   });
-  if(!isNaN(d.TO)){const ty=toY(d.TO);
+  if(!isNaN(d.TO)&&d.TO!==0){
+    const ty=toY(d.TO);
     s+=`<line x1="${pL}" y1="${ty}" x2="${W-pR}" y2="${ty}" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="2 2"/>`;
     s+=`<text x="${W-pR+6}" y="${ty+4}" text-anchor="start" font-size="10" fill="#6366f1">Today Open</text>`;}
   s+='</svg>'; svg.innerHTML=s; svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
@@ -640,66 +650,66 @@ function renderLadder(d){
 
 function renderGap(d){
   const row=document.getElementById('gap-row');
-  if(isNaN(d.TO)){row.style.display='none';return;}
+  if(isNaN(d.TO)||d.TO===0){row.style.display='none';return;}
   row.style.display='block';
   const gap=d.TO-d.C,pct=((gap/d.C)*100).toFixed(2);
-  const tag=document.getElementById('gap-tag'),det=document.getElementById('gap-detail');
-  if(gap>0){tag.className='gap-tag gap-up';tag.textContent=`▲ Gap Up  +${r(gap)} (${pct}%)`;
-    det.textContent=Math.abs(gap/d.C*100)>.5?'Significant gap-up. R1 first absorption zone. Gap-fill likely if R1 rejected.':'Small gap. Monitor pivot reclaim for bias confirmation.';}
-  else if(gap<0){tag.className='gap-tag gap-down';tag.textContent=`▼ Gap Down  ${r(gap)} (${pct}%)`;
-    det.textContent=Math.abs(gap/d.C*100)>.5?'Significant gap-down. S1 demand zone. Gap-fill possible on strong bounce.':'Small gap-down. Watch S1; if broken, S2 becomes next target.';}
-  else{tag.className='gap-tag gap-flat';tag.textContent='◆ Flat Open';
+  const tag=document.getElementById('gap-tag'),det=document.getElementById('gap-det');
+  if(gap>0){tag.className='gap-tag gap-up';tag.textContent=`▲ Gap Up  +${R(gap)} (${pct}%)`;
+    det.textContent=Math.abs(pct)>.5?'Significant gap-up. R1 first absorption zone. Gap-fill likely if R1 rejected.':'Small gap. Monitor pivot reclaim.';}
+  else if(gap<0){tag.className='gap-tag gap-dn';tag.textContent=`▼ Gap Down  ${R(gap)} (${pct}%)`;
+    det.textContent=Math.abs(pct)>.5?'Significant gap-down. S1 demand zone. Gap-fill possible on strong bounce.':'Small gap-down. Watch S1; if broken, S2 next.';}
+  else{tag.className='gap-tag gap-fl';tag.textContent='◆ Flat Open';
     det.textContent='Open at previous close. First 15-min candle gives directional signal.';}
 }
 
 function renderInsights(d){
-  document.getElementById('insights-card').style.display='block';
-  const fl=d.floor,rng=d.H-d.L,hiVol=rng/d.C*100>1.5,isBN=curIndex==='Bank Nifty';
-  const ist=nowIST();
-  const nxtSess=isAfterClose(ist)?'next trading session':'today\'s session';
+  document.getElementById('ins-card').style.display='block';
+  const fl=d.floor,rng=d.H-d.L,hiVol=rng/d.C*100>1.5,isBN=curIdx==='Bank Nifty';
+  const t=istNow(),NSE_CLOSE=15*60+30;
+  const forSession = (isWeekday(t.day)&&t.totalMins>=NSE_CLOSE)
+    ? 'next trading session' : 'today\'s session';
   const ins=[
-    {label:'📊 Trend Bias',text:`Levels apply to the <strong>${nxtSess}</strong>. Above <strong>Pivot (${r(fl.P)})</strong> = bullish; target R1→R2. Below = bearish; target S1→S2. Sustain 15 min before committing.`},
-    {label:'⚡ Breakout vs Reversal',text:`R1/S1 = reversal watch zone. R2/S2 = high-probability reversal. R3/S3 = <strong>breakout targets only</strong> on heavy volume. Never fade R3 without confirmation candle.`},
-    {label:isBN?'🏦 Bank Nifty Specifics':'📈 Nifty 50 Specifics',text:isBN?`Higher beta — expect overshoots. Wider SL (20–30 pts) at pivots. R2/S2 more likely hit on RBI/bank-earnings days. Range: 300–600 pts.`:`Tighter, more respected levels. Mid-week adherence highest. Pre-expiry pivot is heavy OI magnet. Normal range: 100–200 pts.`},
-    {label:'🌅 Gap Protocol',text:`Gap >0.5%: Pivot = gap-fill magnet. Trade gap direction only after fill attempt is rejected. Gap >1%: Avoid counter-trend before 10:00 AM.`},
-    {label:hiVol?'🔥 High Volatility':'📅 Expiry Guidance',text:hiVol?`Previous range ${r(rng)} pts (${(rng/d.C*100).toFixed(2)}%) is above normal. R2/S2 more likely tested. Reduce size; prefer S2/R2 reversals.`:`On expiry days Max Pain + PCR co-equal with pivot. ATM strike near Pivot = double magnet. Post-12 PM delta hedging drives moves to R2/S2.`},
-    {label:'🎯 Execution Checklist',text:`1. Open vs Pivot → set bias. 2. Wait for 15-min close at level. 3. Enter on <strong>retest</strong>. 4. SL 0.2–0.3% beyond level. 5. Target next pivot. 6. Exit by <strong>3:15 PM</strong>. 7. Never average against a pivot break.`},
+    {label:'📊 Trend Bias',text:`Levels apply to the <strong>${forSession}</strong>. Above <strong>Pivot (${R(fl.P)})</strong> = bullish; target R1→R2. Below = bearish; target S1→S2. Sustain 15 min before entering.`},
+    {label:'⚡ Breakout vs Reversal',text:`R1/S1 = first-test reversal zones. R2/S2 = high-probability reversals. R3/S3 = <strong>breakout targets only</strong> on heavy volume or major catalyst.`},
+    {label:isBN?'🏦 Bank Nifty':'📈 Nifty 50',text:isBN?`Higher beta — wider spreads. Use 20–30 pt SL at pivots. R2/S2 overshoot common on RBI/bank-earnings days. Range: 300–600 pts.`:`Tighter, more respected levels. Mid-week adherence highest. Pre-expiry pivot = heavy OI magnet. Range: 100–200 pts.`},
+    {label:'🌅 Gap Protocol',text:`Gap >0.5%: Pivot = gap-fill magnet. Trade gap direction only after fill attempt rejected. Gap >1%: Avoid counter-trend before 10 AM.`},
+    {label:hiVol?'🔥 High Volatility':'📅 Expiry Guidance',text:hiVol?`Previous range ${R(rng)} pts (${(rng/d.C*100).toFixed(2)}%) above normal. R2/S2 more likely tested. Reduce size.`:`On expiry: Max Pain + PCR co-equal with pivot. Post-12 PM delta hedging drives moves toward R2/S2.`},
+    {label:'🎯 Checklist',text:`1. Open vs Pivot → bias. 2. Wait 15-min close at level. 3. Enter on <strong>retest</strong>. 4. SL 0.2–0.3% beyond level. 5. Target: next pivot. 6. Exit by <strong>3:15 PM</strong>. 7. Never average against a pivot break.`},
   ];
-  document.getElementById('insights-grid').innerHTML=ins.map(i=>`<div class="insight-item"><div class="insight-label">${i.label}</div><div class="insight-text">${i.text}</div></div>`).join('');
+  document.getElementById('ins-grid').innerHTML=ins.map(i=>`<div class="ii"><div class="il">${i.label}</div><div class="it">${i.text}</div></div>`).join('');
 }
 
 function renderConfluence(d){
-  document.getElementById('confluence-card').style.display='block';
-  const{floor:fl,cam,fib}=d;
-  const thr=fl.P*.003;
+  document.getElementById('conf-card').style.display='block';
+  const{floor:fl,cam:c,fib:f}=d, thr=fl.P*.003;
   const all=[
     ...['R3','R2','R1','P','S1','S2','S3'].map(k=>({m:'Floor',k,v:fl[k]})),
-    ...['R3','R2','R1','S1','S2','S3'].map(k=>({m:'Camarilla',k,v:cam[k]})),
-    ...['R3','R2','R1','P','S1','S2','S3'].map(k=>({m:'Fibonacci',k,v:fib[k]})),
+    ...['R3','R2','R1','S1','S2','S3'].map(k=>({m:'Camarilla',k,v:c[k]})),
+    ...['R3','R2','R1','P','S1','S2','S3'].map(k=>({m:'Fibonacci',k,v:f[k]})),
   ];
   const zones=[];
   for(let i=0;i<all.length;i++)for(let j=i+1;j<all.length;j++){
     if(all[i].m===all[j].m)continue;
     if(Math.abs(all[i].v-all[j].v)<=thr)zones.push({val:(all[i].v+all[j].v)/2,labels:[`${all[i].m} ${all[i].k}`,`${all[j].m} ${all[j].k}`]});
   }
-  const cr=(k,v)=>{const c=k.startsWith('R')?'var(--resist)':k==='P'?'var(--pivot)':'var(--support)';return`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);font-size:12px;"><span style="color:${c};">${k}</span><span style="color:var(--text);">${r(v).toFixed(2)}</span></div>`;};
-  const box=(t,keys,fn)=>`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;"><div class="insight-label">${t}</div>${keys.map(k=>cr(k,fn(k))).join('')}</div>`;
+  const cr=(k,v)=>{const col=k[0]==='R'?'var(--resist)':k==='P'?'var(--pivot)':'var(--support)';return`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);font-size:12px;"><span style="color:${col};">${k}</span><span style="color:var(--text);">${R(v).toFixed(2)}</span></div>`;};
+  const box=(t,keys,fn)=>`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;"><div class="il">${t}</div>${keys.map(k=>cr(k,fn(k))).join('')}</div>`;
   let h=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
     ${box('🔵 Floor',['R3','R2','R1','P','S1','S2','S3'],k=>fl[k])}
-    ${box('🟣 Camarilla',['R3','R2','R1','S1','S2','S3'],k=>cam[k])}
-    ${box('🟡 Fibonacci',['R3','R2','R1','P','S1','S2','S3'],k=>fib[k])}</div>`;
+    ${box('🟣 Camarilla',['R3','R2','R1','S1','S2','S3'],k=>c[k])}
+    ${box('🟡 Fibonacci',['R3','R2','R1','P','S1','S2','S3'],k=>f[k])}</div>`;
   if(zones.length){
     const seen=new Set();
-    h+=`<div class="card-title" style="margin-bottom:10px;">⭐ Confluence Zones (agree within 0.3%)</div><div style="display:flex;flex-wrap:wrap;gap:8px;">`;
-    zones.forEach(z=>{const key=r(z.val).toFixed(0);if(seen.has(key))return;seen.add(key);
+    h+=`<div class="card-title" style="margin-bottom:10px;">⭐ Confluence Zones (within 0.3%)</div><div style="display:flex;flex-wrap:wrap;gap:8px;">`;
+    zones.forEach(z=>{const key=R(z.val).toFixed(0);if(seen.has(key))return;seen.add(key);
       const col=z.val>fl.P?'var(--resist)':'var(--support)';
-      h+=`<div style="padding:8px 14px;border-radius:6px;border:1px solid ${col};background:rgba(255,255,255,.02);font-size:12px;">
-        <div style="color:${col};font-family:'JetBrains Mono';font-size:14px;font-weight:700;">${r(z.val).toFixed(2)}</div>
+      h+=`<div style="padding:8px 14px;border-radius:6px;border:1px solid ${col};background:rgba(255,255,255,.02);">
+        <div style="color:${col};font-family:'JetBrains Mono';font-size:14px;font-weight:700;">${R(z.val).toFixed(2)}</div>
         <div style="color:var(--muted);font-size:10px;margin-top:2px;">${z.labels.join(' · ')}</div>
         <div style="color:${col};font-size:10px;font-weight:600;margin-top:2px;">HIGH PRIORITY ZONE</div></div>`;});
     h+=`</div>`;
   } else {
-    h+=`<div style="color:var(--muted);font-size:12px;padding:8px 0;">No strong confluence this session. Methods diverge — use Floor Pivot as primary reference.</div>`;
+    h+=`<div style="color:var(--muted);font-size:12px;padding:8px 0;">No strong confluence this session. Use Floor Pivot as primary reference.</div>`;
   }
   document.getElementById('conf-inner').innerHTML=h;
 }
@@ -708,8 +718,8 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&['inp-o','inp-h','inp-l','inp-c','inp-to'].includes(document.activeElement?.id))calculate();
 });
 
-// INIT
-doFetch(false);
+// ─── INIT ───
+load(false);
 </script>
 </body>
 </html>
