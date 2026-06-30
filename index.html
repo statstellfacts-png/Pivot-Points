@@ -234,7 +234,11 @@ let userEdited = false;
 // ══════════════════════════════════════════════════════
 const CACHE = {
   '^NSEI': {
-    '2026-06-22': { O:23980.00, H:24177.40, L:23950.00, C:24090.00 },
+    '2026-06-29': { O:24061.00, H:24120.00, L:23920.00, C:23946.00 },
+    '2026-06-25': { O:24022.00, H:24090.00, L:23990.00, C:24056.00 },
+    '2026-06-24': { O:23770.00, H:23900.00, L:23700.00, C:23824.00 },
+    '2026-06-23': { O:24071.30, H:24135.50, L:23784.95, C:23794.45 },
+    '2026-06-22': { O:23980.00, H:24160.00, L:23950.00, C:24090.00 },
     '2026-06-20': { O:23998.00, H:24047.20, L:23901.90, C:24013.10 },
     '2026-06-19': { O:24100.00, H:24189.25, L:23950.00, C:24168.00 },
     '2026-06-18': { O:24044.50, H:24108.20, L:23969.70, C:24085.70 },
@@ -325,50 +329,106 @@ function tick() {
 setInterval(tick,1000); tick();
 
 // ══════════════════════════════════════════════════════
-// LIVE FETCH — Yahoo Finance public API (no key needed)
-// Returns last N days of daily OHLC from YF chart API.
-// We pick the entry whose date matches our target key.
+// LIVE FETCH — tries NSE India first, then Yahoo Finance
+// Both attempts are logged to the diagnostics panel so
+// you can always see exactly which source actually served
+// the data and why a fallback was (or wasn't) used.
 // ══════════════════════════════════════════════════════
-async function fetchYahoo(ticker, targetKey) {
-  const yfTicker = YF_TICKER[ticker] || encodeURIComponent(ticker);
-  // Fetch last 10 trading days (range=10d, interval=1d)
-  // Using Yahoo Finance v8 chart API — no auth required
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${yfTicker}?interval=1d&range=10d`;
+let lastDiagnostics = [];
+
+function logDiag(msg) {
+  lastDiagnostics.push(`${new Date().toLocaleTimeString('en-IN',{hour12:false})} — ${msg}`);
+}
+
+// ── Attempt 1: NSE India official API ──
+// NSE requires a same-origin cookie handshake (visit nseindia.com
+// homepage first to receive cookies, then call the API with those
+// cookies attached). Browsers block this cross-origin from a local
+// HTML file (CORS + cookie jar isolation), so this will almost
+// always fail when run as a static file — but we try it first and
+// surface the real error, rather than skip it silently.
+async function fetchNSE(indexName, targetKey) {
+  const NSE_INDEX_MAP = {
+    '^NSEI':    'NIFTY 50',
+    '^NSEBANK': 'NIFTY BANK',
+    '^CNXMDCP': 'NIFTY MIDCAP 50',
+    '^CNXFIN':  'NIFTY FINANCIAL SERVICES',
+  };
+  const symbol = NSE_INDEX_MAP[curTicker] || 'NIFTY 50';
+  const url = `https://www.nseindia.com/api/historical/indicesHistory?indexType=${encodeURIComponent(symbol)}&from=${targetKey.split('-').reverse().join('-')}&to=${targetKey.split('-').reverse().join('-')}`;
 
   const res = await fetch(url, {
-    headers: { 'Accept': 'application/json' }
+    headers: { 'Accept':'application/json' },
+    mode: 'cors'
   });
-  if (!res.ok) throw new Error(`YF HTTP ${res.status}`);
+  if (!res.ok) throw new Error(`NSE HTTP ${res.status} (expected — NSE blocks cross-origin requests without a cookie session)`);
+  const json = await res.json();
+  const rec = json?.data?.indexCloseOnlineRecords?.[0];
+  if (!rec) throw new Error('NSE returned no data for this date');
+  return {
+    key: targetKey,
+    O: rec.EOD_OPEN_INDEX_VAL, H: rec.EOD_HIGH_INDEX_VAL,
+    L: rec.EOD_LOW_INDEX_VAL,  C: rec.EOD_CLOSE_INDEX_VAL,
+    source: 'NSE India'
+  };
+}
+
+// ── Attempt 2: Yahoo Finance public chart API (CORS-open, no auth) ──
+async function fetchYahoo(ticker, targetKey) {
+  const yfTicker = YF_TICKER[ticker] || encodeURIComponent(ticker);
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${yfTicker}?interval=1d&range=15d`;
+
+  const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+  if (!res.ok) throw new Error(`Yahoo Finance HTTP ${res.status}`);
   const json = await res.json();
 
   const result = json?.chart?.result?.[0];
-  if (!result) throw new Error('No chart result');
+  if (!result) throw new Error('Yahoo Finance returned no chart result');
 
   const timestamps = result.timestamp;
   const q = result.indicators?.quote?.[0];
-  if (!timestamps || !q) throw new Error('No quote data');
+  if (!timestamps || !q) throw new Error('Yahoo Finance returned no quote data');
 
-  // Convert each Unix timestamp to IST date string
-  // YF timestamps are UTC seconds; IST = UTC+5:30
-  const IST_OFFSET = 5.5 * 3600; // seconds
+  const IST_OFFSET = 5.5 * 3600;
   const rows = timestamps.map((ts, i) => {
     const istDate = new Date((ts + IST_OFFSET) * 1000);
     const key = `${istDate.getUTCFullYear()}-${pad2(istDate.getUTCMonth()+1)}-${pad2(istDate.getUTCDate())}`;
-    return {
-      key,
-      O: q.open[i], H: q.high[i], L: q.low[i], C: q.close[i]
-    };
-  }).filter(r => r.O && r.H && r.L && r.C); // skip nulls (incomplete trading days)
+    return { key, O:q.open[i], H:q.high[i], L:q.low[i], C:q.close[i] };
+  }).filter(r => r.O!=null && r.H!=null && r.L!=null && r.C!=null);
 
-  // Find the row matching our target date
+  logDiag(`Yahoo Finance returned ${rows.length} trading days: ${rows.map(r=>r.key).join(', ')}`);
+
   const match = rows.find(r => r.key === targetKey);
-  if (match) return match;
+  if (match) return { ...match, source:'Yahoo Finance' };
 
-  // If no exact match, find the most recent available row that is ≤ targetKey
+  // No exact match for target date (could be a market holiday) —
+  // use nearest PRIOR trading day actually present in the response.
   const sorted = rows.filter(r => r.key <= targetKey).sort((a,b)=>b.key.localeCompare(a.key));
-  if (sorted.length) return { ...sorted[0], fallbackFrom: sorted[0].key };
+  if (sorted.length) return { ...sorted[0], source:'Yahoo Finance', fallbackFrom: sorted[0].key };
 
-  throw new Error(`No data for ${targetKey} in YF response`);
+  throw new Error(`No trading day ≤ ${targetKey} found in Yahoo Finance's returned range`);
+}
+
+// ── Orchestrator: try NSE, then Yahoo, surfacing both outcomes ──
+async function fetchLiveOHLC(ticker, targetKey) {
+  lastDiagnostics = [];
+  try {
+    logDiag('Attempting NSE India official API…');
+    const nse = await fetchNSE(curIdx, targetKey);
+    logDiag('✓ NSE India succeeded');
+    return nse;
+  } catch (nseErr) {
+    logDiag(`✗ NSE India failed: ${nseErr.message}`);
+  }
+  try {
+    logDiag('Attempting Yahoo Finance…');
+    const yf = await fetchYahoo(ticker, targetKey);
+    logDiag('✓ Yahoo Finance succeeded');
+    return yf;
+  } catch (yfErr) {
+    logDiag(`✗ Yahoo Finance failed: ${yfErr.message}`);
+    throw yfErr;
+  }
 }
 
 // ══════════════════════════════════════════════════════
@@ -453,54 +513,70 @@ async function load(manual=false){
     ? `After 15:30 IST — loading today's closed session (${disp})`
     : `Pre-market / market open — loading last closed session (${disp})`;
 
-  setBanner('info','🔍',`Fetching ${disp} from Yahoo Finance…`, context);
+  setBanner('info','🔍',`Searching NSE / Yahoo Finance for ${disp}…`, context);
 
   try {
-    // ── PRIMARY: Yahoo Finance live fetch (no API key needed) ──
-    const live = await fetchYahoo(curTicker, targetKey);
+    // ── PRIMARY: live fetch, NSE first then Yahoo Finance ──
+    const live = await fetchLiveOHLC(curTicker, targetKey);
     fillFields({ O:live.O, H:live.H, L:live.L, C:live.C });
 
     if (live.fallbackFrom && live.fallbackFrom !== targetKey) {
-      // YF returned nearest prior date (e.g. holiday / weekend)
+      // Source returned nearest prior trading date (e.g. ${disp} was a holiday)
       setBanner('live','📅',
-        `Live — ${dispDate(live.fallbackFrom)} (nearest prior to ${disp})`,
-        `${context} · ${disp} is not a trading day — showing nearest prior session. Source: Yahoo Finance.`
+        `Live — ${dispDate(live.fallbackFrom)} (nearest prior to ${disp}) · ${live.source}`,
+        `${context} · ${disp} appears to be a non-trading day — showing nearest prior session. Edit fields if needed.`
       );
     } else {
       setBanner('live','✅',
-        `Live — ${disp} · Yahoo Finance`,
+        `Live — ${disp} · Source: ${live.source}`,
         `${context} · Edit any field to override.`
       );
     }
-    setStatus('Live data loaded ✓', 4000);
+    setStatus(`Live data loaded ✓ (${live.source})`, 5000);
+    showDiagnostics();
 
   } catch(liveErr) {
+    showDiagnostics();
     // ── FALLBACK: hardcoded cache ──
-    console.warn('Yahoo fetch failed:', liveErr.message);
     const fb = fromCache(curTicker, targetKey);
     if(fb){
       fillFields(fb.data);
       const exact = fb.key===targetKey;
       setBanner(
-        exact?'warn':'warn',
+        'warn',
         exact?'📅':'⚠️',
         exact
-          ? `Offline Cache — ${dispDate(fb.key)}`
-          : `Offline Cache — ${dispDate(fb.key)} (nearest to ${disp})`,
-        `Yahoo Finance unavailable. ${context}. Using offline cache — verify values if needed.`
+          ? `Offline Cache — ${dispDate(fb.key)} (live sources unavailable)`
+          : `Offline Cache — ${dispDate(fb.key)} ≠ target ${disp}`,
+        exact
+          ? `Live fetch failed for both NSE and Yahoo Finance. ${context}. Showing cached value for the EXACT target date — verify before trading. See diagnostics below.`
+          : `⚠️ Cache has NO entry for ${disp} — nearest available cached date is ${dispDate(fb.key)}, which may be stale. ${context}. Please verify manually or add ${disp} to the cache. See diagnostics below.`
       );
-      setStatus('Loaded from offline cache', 4000);
+      setStatus('Loaded from offline cache — see diagnostics', 6000);
     } else {
       emptyFields();
-      setBanner('err','⚠️','Enter Manually',
-        `Yahoo Finance unavailable and no cache for ${curIdx} on ${disp}. Enter previous session OHLC manually.`
+      setBanner('err','⚠️','Enter Manually — All Sources Failed',
+        `NSE, Yahoo Finance, and offline cache all failed/missing for ${curIdx} on ${disp}. Enter OHLC manually. See diagnostics below.`
       );
-      setStatus('Enter manually', 4000);
+      setStatus('Enter manually', 6000);
     }
   }
 
   setSpin(false);
   if(!userEdited) setTimeout(calculate, 350);
+}
+
+// ── Diagnostics panel — shows exactly what each source attempt returned ──
+function showDiagnostics() {
+  let el = document.getElementById('diag-panel');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'diag-panel';
+    el.style.cssText = 'margin-top:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:7px;font-family:\'JetBrains Mono\',monospace;font-size:10.5px;color:var(--muted);line-height:1.7;max-height:140px;overflow-y:auto;';
+    document.getElementById('banner').insertAdjacentElement('afterend', el);
+  }
+  el.innerHTML = '<div style="color:var(--muted);font-weight:700;letter-spacing:.08em;margin-bottom:4px;font-family:\'Space Grotesk\',sans-serif;font-size:9px;text-transform:uppercase;">Fetch Diagnostics</div>' +
+    lastDiagnostics.map(l => `<div>${l}</div>`).join('');
 }
 
 // ══════════════════════════════════════════════════════
